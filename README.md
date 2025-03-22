@@ -1,6 +1,6 @@
 # EventCrafter
 
-EventCrafter is a web-based event registration and management system built using Jakarta EE, JSP/Servlets, and JDBC. It allows users to create, manage, and register for events while handling authentication, session management, and database integration. This project is designed as a professional portfolio piece to showcase Java enterprise development skills and deployment on AWS.
+EventCrafter is a web-based event registration and management system built using Jakarta EE, JSP/Servlets, and JDBC. It allows users to create, manage, and register for events while handling authentication, session management, and database integration. This project is designed as a professional portfolio piece to showcase Java enterprise development skills and deployment on Tomcat.
 
 ## Features
 
