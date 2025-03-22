@@ -13,6 +13,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.List;
 
+/**
+ * Retrieves and displays key dashboard data, including event counts, user statistics, and other relevant information.
+ * 
+ * @author tyler
+ */
 @WebServlet("/dashboard")
 public class DashboardServlet extends HttpServlet {
 
@@ -39,7 +44,7 @@ public class DashboardServlet extends HttpServlet {
 
     @Override
     public String getServletInfo() {
-        return "Servlet to display the dashboard with a list of events.";
+        return "Retrieves and displays key dashboard data, including event counts, user statistics, and other relevant information.";
     }
 
 }

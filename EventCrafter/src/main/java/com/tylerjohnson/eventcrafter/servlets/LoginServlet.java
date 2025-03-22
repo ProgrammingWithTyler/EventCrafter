@@ -11,6 +11,11 @@ import jakarta.servlet.http.HttpSession;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Handles user authentication and session management.
+ * 
+ * @author tyler
+ */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 

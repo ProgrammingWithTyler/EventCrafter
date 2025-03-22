@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Servlet to delete an event from the database.
+ * Deletes an event from the database based on the provided event ID.
  * 
  * @author tyler
  */
@@ -78,7 +78,7 @@ public class DeleteEventServlet extends HttpServlet {
 
     @Override
     public String getServletInfo() {
-        return "Servlet to delete an event from the database.";
+        return "Deletes an event from the database based on the provided event ID.";
     }
 
 }

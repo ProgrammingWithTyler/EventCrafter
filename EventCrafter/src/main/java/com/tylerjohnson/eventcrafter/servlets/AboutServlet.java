@@ -25,7 +25,7 @@ public class AboutServlet extends HttpServlet {
     
     @Override
     public String getServletInfo() {
-        return "Handles requests for the about.jsp view.";
+        return "Handles requests for the about view.";
     }
 
 }

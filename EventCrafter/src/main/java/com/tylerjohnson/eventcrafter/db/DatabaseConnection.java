@@ -1,6 +1,5 @@
 package com.tylerjohnson.eventcrafter.db;
 
-import com.tylerjohnson.eventcrafter.servlets.CreateEventServlet;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

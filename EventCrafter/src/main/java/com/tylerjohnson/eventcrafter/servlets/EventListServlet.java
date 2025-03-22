@@ -13,6 +13,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Displays events from the 'events' table.
+ * 
+ * @author tyler
+ */
 @WebServlet("/events")
 public class EventListServlet extends HttpServlet {
 
@@ -52,7 +57,7 @@ public class EventListServlet extends HttpServlet {
 
     @Override
     public String getServletInfo() {
-        return "Servlet to display a list of events.";
+        return "Displays events from the 'events' table.";
     }
 
 }

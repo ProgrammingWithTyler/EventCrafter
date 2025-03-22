@@ -11,7 +11,7 @@ EventCrafter is a web-based event registration and management system built using
 - **Form Handling & Validation** – Ensures accurate data input for event creation and registration.
 - **Error Handling** – Provides robust error-catching mechanisms.
 - **Responsive Design** – Uses Bootstrap for a modern and mobile-friendly UI.
-- **Deployment on AWS** – Hosted on an AWS cloud environment for real-world scalability.
+- **Deployment to Tomcat** – Hosted on an AWS cloud environment for real-world scalability.
 
 ## Future Enhancements
 
@@ -24,7 +24,7 @@ EventCrafter is a web-based event registration and management system built using
 - Backend: Jakarta EE (JSP, Servlets), JDBC, Tomcat
 - Frontend: HTML, CSS, Bootstrap, JavaScript
 - Database: MySQL
-- Deployment: AWS (possibly)
+- Deployment: Tomcat
 
 ## Getting Started
 
@@ -43,7 +43,7 @@ EventCrafter is a web-based event registration and management system built using
 git clone https://github.com/programmingwithtyler/EventCrafter.git
 ```
 
-2. Configure the database connection in `web.xml`
+2. Configure the database connection in `DatabaseConnection.java`
 3. build the project using Maven:
 
 ```bash
@@ -51,4 +51,4 @@ mvn clean install
 ```
 
 4. Deploy the WAR file to Apache Tomcat.
-5. Access the app at `http://localhost:8080/EventCrafter`
+5. Access the app at `http://localhost:8080/EventCrafter\`

@@ -9,6 +9,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.logging.Logger;
 
+/**
+ * Registers a user.
+ * 
+ * @author tyler
+ */
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
 

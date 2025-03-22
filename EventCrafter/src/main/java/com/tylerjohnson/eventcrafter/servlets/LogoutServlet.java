@@ -10,6 +10,11 @@ import jakarta.servlet.http.HttpSession;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Handles user logout and session termination.
+ * 
+ * @author tyler
+ */
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
 
