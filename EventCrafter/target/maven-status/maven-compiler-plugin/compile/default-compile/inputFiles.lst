@@ -1,18 +1,19 @@
-C:\DMACC Classes\CIS 175\Modules\Final Project\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\dao\EventDAO.java
-C:\DMACC Classes\CIS 175\Modules\Final Project\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\dao\UserEventDAO.java
-C:\DMACC Classes\CIS 175\Modules\Final Project\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\db\DatabaseConnection.java
-C:\DMACC Classes\CIS 175\Modules\Final Project\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\JakartaRestConfiguration.java
-C:\DMACC Classes\CIS 175\Modules\Final Project\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\model\Event.java
-C:\DMACC Classes\CIS 175\Modules\Final Project\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\model\UserEvent.java
-C:\DMACC Classes\CIS 175\Modules\Final Project\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\resources\JakartaEE11Resource.java
-C:\DMACC Classes\CIS 175\Modules\Final Project\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\AboutServlet.java
-C:\DMACC Classes\CIS 175\Modules\Final Project\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\CreateEventServlet.java
-C:\DMACC Classes\CIS 175\Modules\Final Project\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\DashboardServlet.java
-C:\DMACC Classes\CIS 175\Modules\Final Project\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\DeleteEventServlet.java
-C:\DMACC Classes\CIS 175\Modules\Final Project\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\EditEventServlet.java
-C:\DMACC Classes\CIS 175\Modules\Final Project\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\EventDetailsServlet.java
-C:\DMACC Classes\CIS 175\Modules\Final Project\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\EventListServlet.java
-C:\DMACC Classes\CIS 175\Modules\Final Project\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\LoginServlet.java
-C:\DMACC Classes\CIS 175\Modules\Final Project\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\LogoutServlet.java
-C:\DMACC Classes\CIS 175\Modules\Final Project\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\RegisterEventServlet.java
-C:\DMACC Classes\CIS 175\Modules\Final Project\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\RegisterServlet.java
+C:\GitHub\EventCrafter\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\dao\EventDAO.java
+C:\GitHub\EventCrafter\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\dao\UserEventDAO.java
+C:\GitHub\EventCrafter\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\db\DatabaseConnection.java
+C:\GitHub\EventCrafter\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\JakartaRestConfiguration.java
+C:\GitHub\EventCrafter\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\model\Event.java
+C:\GitHub\EventCrafter\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\model\UserEvent.java
+C:\GitHub\EventCrafter\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\resources\JakartaEE11Resource.java
+C:\GitHub\EventCrafter\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\AboutServlet.java
+C:\GitHub\EventCrafter\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\CreateEventServlet.java
+C:\GitHub\EventCrafter\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\DashboardServlet.java
+C:\GitHub\EventCrafter\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\DeleteEventServlet.java
+C:\GitHub\EventCrafter\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\EditEventServlet.java
+C:\GitHub\EventCrafter\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\EventDetailsServlet.java
+C:\GitHub\EventCrafter\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\EventListServlet.java
+C:\GitHub\EventCrafter\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\LoginServlet.java
+C:\GitHub\EventCrafter\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\LogoutServlet.java
+C:\GitHub\EventCrafter\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\RegisterEventServlet.java
+C:\GitHub\EventCrafter\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\RegisterServlet.java
+C:\GitHub\EventCrafter\EventCrafter\src\main\java\com\tylerjohnson\eventcrafter\servlets\TestConnectionServlet.java

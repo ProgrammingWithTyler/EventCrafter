@@ -6,6 +6,7 @@ com\tylerjohnson\eventcrafter\servlets\EventDetailsServlet.class
 com\tylerjohnson\eventcrafter\model\UserEvent.class
 com\tylerjohnson\eventcrafter\servlets\DeleteEventServlet.class
 com\tylerjohnson\eventcrafter\servlets\DashboardServlet.class
+com\tylerjohnson\eventcrafter\servlets\TestConnectionServlet.class
 com\tylerjohnson\eventcrafter\servlets\RegisterServlet.class
 com\tylerjohnson\eventcrafter\model\Event.class
 com\tylerjohnson\eventcrafter\dao\EventDAO.class

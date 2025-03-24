@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/EventCrafter"/>
+<Context path="/EventCrafter">
+    <Resource auth="Container" 
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              logAbandoned="true"
+              maxActive="100"
+              maxIdle="30"
+              maxWait="10000"
+              name="jdbc/eventcrafter"
+              password="root"
+              removeAbandoned="true"
+              removeAbandonedTimeout="60"
+              type="javax.sql.DataSource"
+              url="jdbc:mysql://localhost:3306/eventcrafter?useSSL=false&amp;serverTimezone=UTC&amp;autoReconnect=true"
+              username="root"/>
+</Context>
