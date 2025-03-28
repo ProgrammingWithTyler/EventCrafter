@@ -1,7 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="jakarta.tags.core" %>
 <%@page session="true" %>
-<jsp:include page="header.jsp"/>
+<jsp:include page="header.jsp">
+    <jsp:param name="pageTitle" value="Home"/>
+</jsp:include>
 
 <c:if test="${not empty param.message}">
     <div class="alert alert-info">${param.message}</div>

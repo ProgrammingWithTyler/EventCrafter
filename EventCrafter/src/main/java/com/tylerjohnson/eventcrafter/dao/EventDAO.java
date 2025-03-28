@@ -41,10 +41,10 @@ public class EventDAO {
         List<Event> events = new ArrayList<>();
         String query = "SELECT * FROM eventcrafter.events ORDER BY date ASC";
 
-        try (Connection conn = getConnection(); 
-             Statement stmt = conn.createStatement(); 
+        try (Connection conn = getConnection();
+             Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
-            
+
             while (rs.next()) {
                 Event event = mapResultSetToEvent(rs);
                 events.add(event);
@@ -119,7 +119,7 @@ public class EventDAO {
             pstmt.setDate(4, Date.valueOf(event.getDate()));
             pstmt.setInt(5, event.getAttendees());
             pstmt.setString(6, event.getCategory());
-            
+
             pstmt.setInt(7, event.getId());
 
             return pstmt.executeUpdate() > 0;
@@ -128,57 +128,57 @@ public class EventDAO {
             return false;
         }
     }
-    
+
     // Pagination Methods
     public static List<Event> getEventsForPage(int page, int recordsPerPage) {
         LOGGER.log(Level.INFO, "Inside EventDAO.getEventsForPage method");
         List<Event> events = new ArrayList<>();
         String query = "SELECT * FROM eventcrafter.events ORDER BY date ASC LIMIT ? OFFSET ?";
-        
+
         try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setInt(1, recordsPerPage);
             pstmt.setInt(2, (page - 1) * recordsPerPage);
-            
+
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 events.add(mapResultSetToEvent(rs));
             }
-            
+
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, e.getMessage());
             LOGGER.log(Level.SEVERE, "Error retrieving events for page: {0}", e.getMessage());
         }
-        
+
         return events;
     }
-    
+
     public static int getTotalEvents() {
         LOGGER.log(Level.INFO, "Inside EventDAO.getTotalEvents method");
         String query = "SELECT COUNT(*) FROM eventcrafter.events";
-        
+
         try (Connection conn = getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
-            
+
             if (rs.next()) {
                 return rs.getInt(1);
             }
-            
+
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Error getting total events: {0}", e.getMessage());
         }
-        
+
         return 0;
     }
-    
+
     // Search/Filter Methods
     public static List<Event> searchEventByTitle(String title) {
         LOGGER.log(Level.INFO, "Inside EventDAO.searchEventByTitle method");
         List<Event> events = new ArrayList<>();
         String query = "SELECT * FROM eventcrafter.events WHERE title LIKE ?";
-        
+
         try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, "%" + title + "%");
             ResultSet rs = pstmt.executeQuery();
-            
+
             while (rs.next()) {
                 events.add(mapResultSetToEvent(rs));
             }
@@ -187,16 +187,16 @@ public class EventDAO {
         }
         return events;
     }
-    
+
     public static List<Event> filterEventsByCategory(String category) {
         LOGGER.log(Level.INFO, "Inside EventDAO.filterEventsByCategory method");
         List<Event> events = new ArrayList<>();
         String query = "SELECT * FROM eventcrafter.events WHERE category = ?";
-        
+
         try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, category);
             ResultSet rs = pstmt.executeQuery();
-            
+
             while (rs.next()) {
                 events.add(mapResultSetToEvent(rs));
             }
@@ -206,16 +206,16 @@ public class EventDAO {
         }
         return events;
     }
-    
+
     public static List<Event> filterEventsByDateRange(LocalDate startDate, LocalDate endDate) {
         LOGGER.log(Level.INFO, "Inside EventDAO.filterEventsByDateRange method");
         List<Event> events = new ArrayList<>();
         String query = "SELECT * FROM eventcrafter.events WHERE date BETWEEN ? AND ?";
-        
+
         try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setDate(1, Date.valueOf(startDate));
             pstmt.setDate(2, Date.valueOf(endDate));
-            ResultSet rs = pstmt.executeQuery();            
+            ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 events.add(mapResultSetToEvent(rs));
             }
@@ -224,13 +224,61 @@ public class EventDAO {
         }
         return events;
     }
-    
+
+    public static List<Event> searchAndFilterEvents(String title, String category, LocalDate startDate, LocalDate endDate) {
+        LOGGER.log(Level.INFO, "Inside EventDAO.searchAndFilterEvents method");
+        List<Event> events = new ArrayList<>();
+
+        // Build dynamic query based on provided filters
+        StringBuilder query = new StringBuilder("SELECT * FROM eventcrafter.events WHERE 1=1");
+
+        if (title != null && !title.isEmpty()) {
+            query.append(" AND title LIKE ?");
+        }
+        if (category != null && !category.isEmpty()) {
+            query.append(" AND category = ?");
+        }
+        if (startDate != null && endDate != null) {
+            query.append(" AND date BETWEEN ? AND ?");
+        }
+
+        try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(query.toString())) {
+            int paramIndex = 1;
+
+            // Set parameters for title, if present
+            if (title != null && !title.isEmpty()) {
+                pstmt.setString(paramIndex++, "%" + title + "%");
+            }
+            
+            // Set parameters for category, if present
+            if (category != null && !category.isEmpty()) {
+                pstmt.setString(paramIndex++, category);
+            }
+            
+            // Set parameters for date, if present
+            if (startDate != null && endDate != null) {
+                pstmt.setDate(paramIndex++ , Date.valueOf(startDate));
+                pstmt.setDate(paramIndex++ , Date.valueOf(endDate));
+            }
+            
+            ResultSet rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+                events.add(mapResultSetToEvent(rs));
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error filtering events: {0}", e.getMessage());
+        }
+
+        return events;
+    }
+
     // Additional Get Methods
     public static List<Event> getUpcomingEvents() {
         LOGGER.log(Level.INFO, "Inside EventDAO.getUpcomingEvents method");
         List<Event> events = new ArrayList<>();
         String query = "SELECT * FROM eventcrafter.events WHERE date >= CURDATE() ORDER BY date ASC";
-        
+
         try (Connection conn = getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
                 events.add(mapResultSetToEvent(rs));
@@ -240,12 +288,12 @@ public class EventDAO {
         }
         return events;
     }
-    
+
     public static List<Event> getPastEvents() {
         LOGGER.log(Level.INFO, "Inside EventDAO.getPastEvents method");
         List<Event> events = new ArrayList<>();
         String query = "SELECT * FROM eventcrafter.events WHERE date < CURDATE() ORDER BY date DESC";
-        
+
         try (Connection conn = getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
                 events.add(mapResultSetToEvent(rs));
@@ -255,7 +303,7 @@ public class EventDAO {
         }
         return events;
     }
-    
+
     public static void updateEventAttendence(int eventId) {
         String query = "UPDATE eventcrafter.events SET attendees = (SELECT COUNT(*) from user_events WHERE event_id = ?) WHERE id =?";
         try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(query)) {

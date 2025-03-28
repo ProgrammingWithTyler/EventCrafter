@@ -40,47 +40,4 @@
     </div>
 </c:if>
 
-<!-- Event List -->
-<!--<div class="card p-4">
-    <h2>Upcoming Events</h2>
-    <c:if test="${not empty events}">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Location</th>
-                    <th>Date</th>
-                    <th>Organizer</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach var="event" items="${events}">
-                    <tr>
-                        <td><a href="${pageContext.request.contextPath}/event-details?id=${event.id}">${event.title}</a></td>
-                        <td>${event.description}</td>
-                        <td>${event.location}</td>
-                        <td>${event.date}</td>
-                        <td>${event.organizer}</td>
-                        <td>
-                            <a class="btn btn-warning btn-sm" href="${pageContext.request.contextPath}/event-details?id=${event.id}">Edit</a>
-                            <form action="events" method="post" style="display:inline;">
-                                <input type="hidden" name="id" value="${event.id}" />
-                                <input type="hidden" name="action" value="delete"/>
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-    </c:if>
-    <c:if test="${empty events}">
-        <div class="alert alert-warning">
-            No events found.
-        </div>
-    </c:if>
-</div>-->
-
 <jsp:include page="footer.jsp"/>

@@ -1,4 +1,5 @@
 com\tylerjohnson\eventcrafter\servlets\EditEventServlet.class
+com\tylerjohnson\eventcrafter\servlets\SearchEventsServlet.class
 com\tylerjohnson\eventcrafter\JakartaRestConfiguration.class
 com\tylerjohnson\eventcrafter\servlets\EventListServlet.class
 com\tylerjohnson\eventcrafter\resources\JakartaEE11Resource.class
