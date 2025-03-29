@@ -19,7 +19,7 @@
     <c:remove var="error" scope="session"/>
 </c:if>
 
-<div class="d-flex justify-content-end m-3">
+<div class="d-flex justify-content-end m-4">
     <a href="${pageContext.request.contextPath}/events" class="btn btn-primary">View Events</a>
     <a href="${pageContext.request.contextPath}/create-event" class="btn btn-primary">Create Event</a>
 </div>

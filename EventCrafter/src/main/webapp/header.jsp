@@ -51,6 +51,9 @@
                                 <li class="nav-item ms-auto">
                                     <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
                                 </li>
+                                <li class="navbar-item ${ageContext.request.servletPath == '/about' ? 'active' : ''}">
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/about">About</a>
+                                </li>
                             </c:otherwise>
                         </c:choose>
                     </ul>

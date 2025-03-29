@@ -43,9 +43,10 @@ public class CreateEventServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("user");
 
-        if (username == null) {
+        if (username == null || !isAuthorized(session)) {
             LOGGER.warning("Unauthorized access attempt to event creation");
-            response.sendRedirect(request.getContextPath() + "/login");
+            session.setAttribute("error", "Unauthorized access attempt to event creation.");
+            response.sendRedirect(request.getContextPath() + "/create-event");
             return;
         }
 
@@ -97,6 +98,11 @@ public class CreateEventServlet extends HttpServlet {
             LOGGER.log(Level.WARNING, "Error passing event data: {0}", e.getMessage());
             return null; // If parsing fails, return null
         }
+    }
+    
+    private boolean isAuthorized(HttpSession session) {
+        String role = (String) session.getAttribute("role");
+        return role != null && (role.equals("organizer")  || role.equals("admin"));
     }
 
     @Override

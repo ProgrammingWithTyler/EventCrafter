@@ -8,8 +8,8 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <h2 class="text-center mb-4">Login</h2>
-            <c:if test="${not empty error}">
-                <div class="alert alert-danger">${error}</div>
+            <c:if test="${not empty sessionScope.error}">
+                <div class="alert alert-danger">${sessionScope.error}</div>
             </c:if>
             <form action="${pageContext.request.contextPath}/login" method="post">
                 <div class="mb-3">

@@ -12,6 +12,17 @@
     </c:redirect>
 </c:if>
 
+<c:if test="${not empty sessionScope.message}">
+    <div class="alert alert-success">${sessionScope.message}</div>
+    <c:remove var="message" scope="session"/>
+</c:if>
+
+<c:if test="${not empty sessionScope.error}">
+    <div class="alert alert-danger">${sessionScope.error}</div>
+    <c:remove var="error" scope="session"/>
+</c:if>
+
+
 <div class="container p-4">
     <h2>Edit Event</h2>
     <form action="${pageContext.request.contextPath}/events" method="post" class="mt-3">

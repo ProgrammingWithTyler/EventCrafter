@@ -76,9 +76,10 @@ public class EditEventServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false); // Get session, but don't create if it doesn't exist
 
-        if (session == null || session.getAttribute("user") == null) {
+        if (session == null || !isAuthorized(session)) {
             LOGGER.warning("Unauthorized access attempt to event editing.");
-            response.sendRedirect(request.getContextPath() + "/login");
+            session.setAttribute("error", "Unauthorized access attempt to event editing.");
+            response.sendRedirect(request.getContextPath() + "/events");
             return;
         }
 
@@ -101,6 +102,11 @@ public class EditEventServlet extends HttpServlet {
         LOGGER.log(Level.INFO, "Event{0} updated by user: {1}", new Object[]{event.getId(), (String) session.getAttribute("user")});
         request.setAttribute("message", "Event updated successfully");
         request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+    }
+
+    private boolean isAuthorized(HttpSession session) {
+        String role = (String) session.getAttribute("role");
+        return role != null && (role.equals("organizer") || role.equals("admin"));
     }
 
     private Event extractEventFromRequest(HttpServletRequest request) {

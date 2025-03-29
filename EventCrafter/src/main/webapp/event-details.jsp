@@ -25,10 +25,14 @@
     <p><strong>Description:</strong> ${event.description}</p>
     <p><strong>Date:</strong> ${event.date}</p>
     <p><strong>Organizer:</strong> ${event.organizer}</p>
-    
+
     <a class="link-offset-2 link-offset-3-hover link-underline link-opacity-0 link-underline-opacity-75-hover" href="${pageContext.request.contextPath}/dashboard">Back to Dashboard</a> |
     <a class="link-offset-2 link-offset-3-hover link-underline link-opacity-0 link-underline-opacity-75-hover" href="${pageContext.request.contextPath}/edit-event?id=${event.id}">Edit Event</a> |
-    <a class="link-offset-2 link-offset-3-hover link-underline link-opacity-0 link-underline-opacity-75-hover" href="${pageContext.request.contextPath}/delete-event?id=${event.id}" onclick="return confirm('Are you sure?')">Delete Event</a>
+    <form action="${pageContext.request.contextPath}/delete-event" method="post" onsubmit="return confirm('Are you sure you want to delete this event?')">
+        <input type="hidden" name="id" value="${event.id}">
+        <button type="submit" class="btn btn-danger">Delete Event</button>
+    </form>
 </div>
 
-    <jsp:include page="footer.jsp"/>
+<jsp:include page="footer.jsp"/>
+
