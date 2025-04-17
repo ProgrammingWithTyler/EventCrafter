@@ -25,14 +25,14 @@ public class CreateEventServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession session = request.getSession(false); // Get session, but don't create if it doesn't exist
 
         if (session == null || session.getAttribute("user") == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
-        
+
         request.getRequestDispatcher("create-event.jsp").forward(request, response);
     }
 
@@ -41,12 +41,14 @@ public class CreateEventServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("user");
+        String username = (session != null) ? (String) session.getAttribute("user") : null;
 
         if (username == null || !isAuthorized(session)) {
-            LOGGER.warning("Unauthorized access attempt to event creation");
-            session.setAttribute("error", "Unauthorized access attempt to event creation.");
-            response.sendRedirect(request.getContextPath() + "/create-event");
+            LOGGER.warning("Unauthorized event creation attempt");
+            if (session != null) {
+                session.setAttribute("error", "Access denied.");
+            }
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 
@@ -59,21 +61,10 @@ public class CreateEventServlet extends HttpServlet {
             return;
         }
 
-        // Authorization check: Only organizer level or high can create events.
-        if (!event.getOrganizer().equals(username)) {
-            LOGGER.warning("User does not have permission to delete this event.");
-            request.getRequestDispatcher("create-event.jsp").forward(request, response);
-        }
-
         event.setOrganizer(username);
 
         boolean success = EventDAO.addEvent(event);
-
-        if (success) {
-            request.setAttribute("message", "Event added successfully");
-        } else {
-            request.setAttribute("error", "Failed to add event");
-        }
+        request.setAttribute(success ? "message" : "error", success ? "Event added successfully." : "Failed to add event.");
 
         request.setAttribute("events", EventDAO.getAllEvents());
         request.getRequestDispatcher("dashboard.jsp").forward(request, response);
@@ -86,12 +77,33 @@ public class CreateEventServlet extends HttpServlet {
             String location = request.getParameter("location");
             String dateStr = request.getParameter("date"); // Format: YYYY-MM-DD
             String category = request.getParameter("category");
-            int attendees = Integer.parseInt(request.getParameter("attendees"));
 
-            if (title == null || title.isEmpty() || dateStr == null || dateStr.isEmpty() || category == null || category.isEmpty()) {
+            LOGGER.log(Level.INFO, "Event data: title={0}, date={1}, category={2}", new Object[]{title, dateStr, category});
+
+            if (title == null || title.isEmpty()) {
+                LOGGER.warning("Title is null or empty");
                 return null;
             }
 
+            if (dateStr == null || dateStr.isEmpty()) {
+                LOGGER.warning("Date string is null or empty");
+                return null;
+            }
+
+            if (category == null || category.isEmpty()) {
+                LOGGER.warning("Category is null or empty");
+                return null;
+            }
+            
+            int attendees;
+            String attendeesStr = request.getParameter("attendees");
+            try {
+                attendees = Integer.parseInt(attendeesStr);
+            } catch (NumberFormatException e) {
+                LOGGER.warning("");
+                return null;
+            }
+            
             LocalDate date = LocalDate.parse(dateStr);
             return new Event(0, title, description, location, date, "", attendees, category);
         } catch (Exception e) {
@@ -99,10 +111,11 @@ public class CreateEventServlet extends HttpServlet {
             return null; // If parsing fails, return null
         }
     }
-    
+
     private boolean isAuthorized(HttpSession session) {
         String role = (String) session.getAttribute("role");
-        return role != null && (role.equals("organizer")  || role.equals("admin"));
+        LOGGER.info("role: " + role);
+        return role != null && (role.equals("organizer") || role.equals("admin"));
     }
 
     @Override

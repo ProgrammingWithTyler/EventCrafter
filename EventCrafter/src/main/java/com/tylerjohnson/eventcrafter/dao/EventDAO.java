@@ -16,7 +16,7 @@ public class EventDAO {
     // Add an event to the database
     public static boolean addEvent(Event event) {
         LOGGER.log(Level.INFO, "Inside EventDAO.addEvent method");
-        String query = "INSERT INTO eventcrafter.events (title, description, location, date, attendees, category) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO eventcrafter.events (title, description, location, date,organizer, attendees, category) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(query)) {
 

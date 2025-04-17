@@ -48,10 +48,12 @@ public class LoginServlet extends HttpServlet {
 
         try {
             if (DatabaseConnection.validateUser(username, password)) {
+                String userRole = DatabaseConnection.getUserRole(username);
                 HttpSession session = request.getSession();
                 session.setAttribute("user", username);
+                session.setAttribute("role", userRole);
 
-                LOGGER.log(Level.INFO, "User {0} successfully logged in", username);
+                LOGGER.log(Level.INFO, "User {0} successfully logged in with role: {1}", new Object[] {username, userRole});
                 response.sendRedirect(request.getContextPath() + "/dashboard"); // Redirect to dashboard servlet
             } else {
                 LOGGER.log(Level.INFO, "Failed login attempt for user: {0}", username);

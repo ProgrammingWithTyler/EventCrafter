@@ -39,6 +39,22 @@
             <label for="date" class="form-label">Date:</label>
             <input type="date" id="date" name="date" class="form-control" required>
         </div>
+        
+        <div class="mb-3">
+            <label for="attendees" class="form-label">Attendees:</label>
+            <input type="number" id="attendees" name="attendees" class="form-control" min="0" value="0" required>
+        </div>
+        
+        <div class="mb-3">
+            <label for="category" class="form-label">Category:</label>
+            <select id="category" name="category" class="form-select" required>
+                <option value="">-- Select Category --</option>
+                <option value="Conference">Conference</option>
+                <option value="Meetup">Meetup</option>
+                <option value="Workshop">Workshop</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
 
         <button type="submit" class="btn btn-primary">Create Event</button>
     </form>

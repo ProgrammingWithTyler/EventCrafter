@@ -59,7 +59,7 @@ public class UserEventDAO {
     }
     
     public static UserEvent getUserEvent(String username, int eventId) {
-        String query = "SELECT * FROM user_events ue JOIN users u ON ue.user_id = u.id WHERE u.username = ? AND ue.event_id = ?";
+        String query = "SELECT * FROM eventcrafter.user_events ue JOIN users u ON ue.user_id = u.id WHERE u.username = ? AND ue.event_id = ?";
         UserEvent userEvent = null;
         
         try (Connection conn = getConnection();
@@ -83,7 +83,7 @@ public class UserEventDAO {
     
     public static List<Event> getRegisteredEvents(String username) {
         List<Event> registeredEvents = new ArrayList<>();
-        String query = "SELECT e.* FROM events e JOIN user_events ue ON e.id = ue.event_id JOIN users u ON ue.user_id = u.id WHERE username = ?";
+        String query = "SELECT e.* FROM eventcrafter.events e JOIN user_events ue ON e.id = ue.event_id JOIN users u ON ue.user_id = u.id WHERE username = ?";
         
         try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, username);

@@ -164,4 +164,22 @@ public class DatabaseConnection {
         }
         return true;
     }
+    
+    public static String getUserRole(String username) {
+        String role = null;
+        String query = "SELECT role FROM eventcrafter.users WHERE username = ?";
+        
+        try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            
+            if (rs.next()) {
+                role = rs.getString("role");
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error retrieving user role: {0}", e.getMessage());
+        }
+        
+        return role;
+    }
 }
