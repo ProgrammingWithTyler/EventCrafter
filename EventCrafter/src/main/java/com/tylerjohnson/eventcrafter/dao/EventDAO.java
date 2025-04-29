@@ -9,11 +9,17 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * EventDAO handles all database operations related to the Event entity.
+ * This includes inserting, retrieving, updating, deleting event records.
+ */
 public class EventDAO {
 
     private static final Logger LOGGER = Logger.getLogger(EventDAO.class.getName());
 
-    // Add an event to the database
+    /**
+     * Add an event to the database.
+     */
     public static boolean addEvent(Event event) {
         LOGGER.log(Level.INFO, "Inside EventDAO.addEvent method");
         String query = "INSERT INTO eventcrafter.events (title, description, location, date,organizer, attendees, category) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -35,7 +41,9 @@ public class EventDAO {
         return false;
     }
 
-    // Get all events
+    /**
+     * Get all the events.
+     */
     public static List<Event> getAllEvents() {
         LOGGER.log(Level.INFO, "Inside EventDAO.getAllEvents method");
         List<Event> events = new ArrayList<>();
@@ -56,7 +64,9 @@ public class EventDAO {
         return events;
     }
 
-    // Get event by id
+    /**
+     * Gets the event by id.
+     */
     public static Event getEventById(int id) {
         String query = "SELECT * FROM eventcrafter.events WHERE id = ?";
 
@@ -74,7 +84,9 @@ public class EventDAO {
         return null;
     }
 
-    // Get events created by a specific user
+    /**
+     * Get the events created by a specific user.
+     */
     public static List<Event> getEventsByUser(String username) {
         List<Event> events = new ArrayList<>();
         String query = "SELECT * FROM eventcrafter.events WHERE organizer = ?";
@@ -93,7 +105,9 @@ public class EventDAO {
         return events;
     }
 
-    // Delete an event by ID
+    /**
+     * Delete an event by ID.
+     */
     public static boolean deleteEvent(int eventId) {
         String query = "DELETE FROM eventcrafter.events WHERE id = ?";
 
@@ -107,7 +121,9 @@ public class EventDAO {
         return false;
     }
 
-    // Update an event
+    /**
+     * Updates the event.
+     */
     public static boolean updateEvent(Event event) {
         String query = "UPDATE eventcrafter.events SET title = ?, description = ?, location = ?, date = ?, attendees = ?, category = ? WHERE id = ?";
 
@@ -129,7 +145,9 @@ public class EventDAO {
         }
     }
 
-    // Pagination Methods
+    /**
+     * Pagination methods for EventDAO.
+     */
     public static List<Event> getEventsForPage(int page, int recordsPerPage) {
         LOGGER.log(Level.INFO, "Inside EventDAO.getEventsForPage method");
         List<Event> events = new ArrayList<>();
@@ -152,6 +170,9 @@ public class EventDAO {
         return events;
     }
 
+    /**
+     * Gets the total number of events in a single page.
+     */
     public static int getTotalEvents() {
         LOGGER.log(Level.INFO, "Inside EventDAO.getTotalEvents method");
         String query = "SELECT COUNT(*) FROM eventcrafter.events";
@@ -169,7 +190,9 @@ public class EventDAO {
         return 0;
     }
 
-    // Search/Filter Methods
+    /**
+     * Searches the event by title.
+     */
     public static List<Event> searchEventByTitle(String title) {
         LOGGER.log(Level.INFO, "Inside EventDAO.searchEventByTitle method");
         List<Event> events = new ArrayList<>();
@@ -188,6 +211,9 @@ public class EventDAO {
         return events;
     }
 
+    /**
+     * Filters the event by category.
+     */
     public static List<Event> filterEventsByCategory(String category) {
         LOGGER.log(Level.INFO, "Inside EventDAO.filterEventsByCategory method");
         List<Event> events = new ArrayList<>();
@@ -207,6 +233,9 @@ public class EventDAO {
         return events;
     }
 
+    /**
+     * Filters the events by a date range.
+     */
     public static List<Event> filterEventsByDateRange(LocalDate startDate, LocalDate endDate) {
         LOGGER.log(Level.INFO, "Inside EventDAO.filterEventsByDateRange method");
         List<Event> events = new ArrayList<>();
@@ -225,6 +254,9 @@ public class EventDAO {
         return events;
     }
 
+    /**
+     * Searches and filters the events.
+     */
     public static List<Event> searchAndFilterEvents(String title, String category, LocalDate startDate, LocalDate endDate) {
         LOGGER.log(Level.INFO, "Inside EventDAO.searchAndFilterEvents method");
         List<Event> events = new ArrayList<>();
@@ -273,7 +305,9 @@ public class EventDAO {
         return events;
     }
 
-    // Additional Get Methods
+    /**
+     * Gets all upcoming events from current date.
+     */
     public static List<Event> getUpcomingEvents() {
         LOGGER.log(Level.INFO, "Inside EventDAO.getUpcomingEvents method");
         List<Event> events = new ArrayList<>();
@@ -289,6 +323,9 @@ public class EventDAO {
         return events;
     }
 
+    /**
+     * Gets all upcoming events past the current date.
+     */
     public static List<Event> getPastEvents() {
         LOGGER.log(Level.INFO, "Inside EventDAO.getPastEvents method");
         List<Event> events = new ArrayList<>();
@@ -304,6 +341,9 @@ public class EventDAO {
         return events;
     }
 
+    /**
+     * Updates the event attendance.
+     */
     public static void updateEventAttendence(int eventId) {
         String query = "UPDATE eventcrafter.events SET attendees = (SELECT COUNT(*) from user_events WHERE event_id = ?) WHERE id =?";
         try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -315,7 +355,9 @@ public class EventDAO {
         }
     }
 
-    // Helper method to map ResultSet to Event object
+    /**
+     * Helper method to map ResultSet to Event object.
+     */ 
     private static Event mapResultSetToEvent(ResultSet rs) throws SQLException {
         return new Event(
                 rs.getInt("id"),

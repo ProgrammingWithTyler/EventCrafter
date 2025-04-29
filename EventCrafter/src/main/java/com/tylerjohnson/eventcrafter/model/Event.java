@@ -2,15 +2,57 @@ package com.tylerjohnson.eventcrafter.model;
 
 import java.time.LocalDate;
 
+/**
+ * Represents an event in the system, containing all metadata necessary for display, organization, and user registration.
+ * 
+ * This model maps directly to the "events" table in the database.
+ * It is used throughout the app for:
+ * - creating new events
+ * - Displaying event details
+ * - Querying events a user has registered for
+ * 
+ * Fields:
+ * - id: unique identifier for the event (used as primary key)
+ * - title: name of the event
+ * - description: detailed information about the event
+ * - location: where the event is held
+ * - date: when the event takes place
+ * - organizer: who is hosting the event
+ * - attendees: how many people are expected or currently registered
+ * - category: classification of the event (e.g., conference, workshop, etc.)
+ *   (Stored as a String; enums aren't directly persisted in JDBC without conversion)
+ * 
+ * Common usage:
+ * This class is returned by DAOs and passed to views and controllers.
+ * 
+ * @author Tyler
+ * 
+ */
 public class Event {
+    
+    // Unique identifier of the event (primary key)
     private int id;
+    
+    // Title of the event
     private String title;
+    
+    // Description of the event
     private String description;
+    
+    // Location where the event is being held
     private String location;
+    
+    // Date of the event
     private LocalDate date;
+    
+    // Name of the organizer
     private String organizer;
+    
+    // Number of attendees expected or registered
     private int attendees;
-    private String category; // This is a String, as ENUM isn't directly supported in Java
+    
+    // Category of the event (This is a String, as ENUM isn't directly supported in Java)
+    private String category;
     
 
     // Constructor with no fields
@@ -104,7 +146,7 @@ public class Event {
         this.category = category;
     }
     
-    // toString() for debugging
+    // toString() for debugging/logging purposes
     @Override
     public String toString() {
         return "Event[" +
